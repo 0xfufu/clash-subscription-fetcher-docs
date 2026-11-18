@@ -60,6 +60,26 @@ docker compose logs -f
 docker compose down
 ```
 
+### 使用 Portainer 部署（可选）
+
+如果服务器上已有 [Portainer](https://www.portainer.io/)，可以直接通过 Git 仓库部署本项目：
+
+1. 登录 Portainer，进入 **Stacks → Add stack**
+2. 输入 Stack 名称，例如 `clash-fetcher`
+3. 选择 **Git repository**，填写：
+   - Repository URL：本仓库地址
+   - Repository reference：`main`
+   - Compose path：`docker-compose.yml`
+4. 点击 **Deploy the stack**，等待构建完成
+
+日常运维：
+
+- 查看日志：**Containers → clash-fetcher → Logs**
+- 重启服务：**Containers → clash-fetcher → Restart**
+- 更新项目：提交代码后进入 **Stacks → clash-fetcher → Editor → Update the stack**
+
+更完整的安装与操作说明见 [Portainer 使用教程](docs/requirements/Portainer使用教程_副本.txt)。
+
 ## API 接口
 
 ### `GET /api/scrape`
