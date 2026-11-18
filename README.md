@@ -28,6 +28,72 @@
 
 ![界面截图2](images/screenshot-2.png)
 
+## 本地运行
+
+需要 Node.js 20 及以上版本。
+
+```bash
+# 安装依赖
+npm install
+
+# 启动服务，默认端口 3000
+npm start
+
+# 指定端口启动
+PORT=8080 npm start
+```
+
+启动后访问 <http://localhost:3000>。
+
+## Docker 部署
+
+项目自带 [Dockerfile](Dockerfile) 与 [docker-compose.yml](docker-compose.yml)。
+
+```bash
+# 构建并启动容器（映射 3000:3000）
+docker compose up -d --build
+
+# 查看日志
+docker compose logs -f
+
+# 停止并移除容器
+docker compose down
+```
+
+## API 接口
+
+### `GET /api/scrape`
+
+抓取最新免费节点页面，返回更新时间与订阅地址。
+
+成功响应：
+
+```json
+{
+  "title": "2026年11月18日 免费节点",
+  "date": "2026-11-18 10:00",
+  "subscriptionUrl": "https://example.com/xxx.yaml"
+}
+```
+
+失败响应（状态码 500）：
+
+```json
+{
+  "error": "错误信息"
+}
+```
+
+## 项目结构
+
+```
+server.js            # Express 服务：静态托管 + /api/scrape 抓取接口
+public/index.html    # 前端页面（HTML/CSS/JS 单文件）
+images/              # README 截图
+Dockerfile           # 生产镜像构建
+docker-compose.yml   # 容器编排
+```
+
 ## 常见问题
 
 **Q: 订阅地址多久更新一次？**
